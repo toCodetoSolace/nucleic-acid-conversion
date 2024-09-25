@@ -1,17 +1,19 @@
-convertDNAtoRNA=function(DNAseq){
-DNAseq=unlist(strsplit(DNAseq,""))
-RNAseq=c()
-for (i in DNAseq){
+convertDNAtoRNA=function(DNAseqfastafile){
+    DNA=readLines(DNAseqfastafile)
+    DNA=paste(DNA[!grepl("^>",DNA)],collapse = "")
+    DNA=unlist(strsplit(DNA,""))
+    RNA=c()
+    for (i in DNA){
     if (i=="A"){
-        RNAseq=c(RNAseq,"U")
+        RNA=c(RNA,"U")
         }else if (i=="T"){
-        RNAseq=c(RNAseq,"A")
+        RNA=c(RNA,"A")
         }else if (i=="C"){
-        RNAseq=c(RNAseq,"G")
+        RNA=c(RNA,"G")
         }else if (i=="G"){
-        RNAseq=c(RNAseq,"C")
+        RNA=c(RNA,"C")
         } 
     }
-    return(RNAseq)
+    return(RNA)
 }
 convertDNAtoRNA()
